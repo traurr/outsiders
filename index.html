@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="#fff" name="theme-color"/>
+<title>OUTSIDERS — Мануал</title>
+<style>
+:root{--bg:#fff;--fg:#111;--muted:#858585;--line:#e8e8e8;--soft:#f5f5f5;--sidebar:250px}
+*{box-sizing:border-box}html{scroll-behavior:auto}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}button,a{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}
+.shell{min-height:100vh;display:grid;grid-template-columns:var(--sidebar) minmax(0,1fr)}.sidebar{height:100vh;position:sticky;top:0;overflow:auto;border-right:1px solid var(--line);padding:25px 15px;background:#fff}.brand{padding:0 12px 20px;border-bottom:0;margin-bottom:17px;font-weight:750;font-size:20px;line-height:1.05;letter-spacing:-.035em}.brand small{display:block;margin-top:5px;font-size:12px;font-weight:500;line-height:1.2;letter-spacing:0;color:var(--muted)}.nav-label{padding:9px 12px;color:#aaa;text-transform:uppercase;letter-spacing:.15em;font-size:10px}.nav-link{display:flex;align-items:center;gap:12px;padding:10px 12px;margin:3px 0;border-radius:8px;color:#444;font-size:13px}.nav-link:hover,.nav-link.active{background:var(--soft);color:#111}
+body:has(.page:target) .nav-link.active{background:transparent;color:#444}
+body:has(#home:target) .nav-link[href="#home"],body:has(#registration:target) .nav-link[href="#registration"],body:has(#models:target) .nav-link[href="#models"],body:has(#model-search:target) .nav-link[href="#model-search"],body:has(#questionnaire:target) .nav-link[href="#questionnaire"],body:has(#first-touch:target) .nav-link[href="#first-touch"],body:has(#faq:target) .nav-link[href="#faq"],body:has(#referrals:target) .nav-link[href="#referrals"],body:has(#payouts:target) .nav-link[href="#payouts"]{background:var(--soft);color:#111}.num{color:#aaa;font-size:10px;min-width:20px}
+.main{width:100%;max-width:1050px;margin:0 auto;padding:44px 55px 80px}.topline{display:flex;flex-direction:column;align-items:flex-start;color:var(--muted);font-size:12px;margin-bottom:24px;padding-bottom:0;border-bottom:0}.topline .site-title{font-size:23px;font-weight:850;letter-spacing:.15em;color:var(--fg);margin-bottom:4px}.topline .site-byline{font-size:13px;color:var(--muted)}.by{color:#777}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:#999;font-weight:700}.home h1{font-size:clamp(32px,4vw,44px);line-height:1.08;letter-spacing:-.04em;margin:14px 0 12px}.home .byline{color:#888;font-size:13px;margin-bottom:32px}.rule{border:0;border-top:1px solid var(--line);margin:0 0 28px}.section-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.section-card{min-height:78px;display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:10px;padding:16px;transition:background .15s,border-color .15s}.section-card:hover{background:#fafafa;border-color:#ccc}.card-num{font-size:11px;color:#aaa;min-width:24px}.card-title{font-size:14px;font-weight:700}.arrow{margin-left:auto;color:#999;font-size:18px}.page{display:none}.page.active{display:block} .page:target{display:block} body:has(.page:target) .page.active:not(:target){display:none} .page:target{scroll-margin-top:0}.page-head{padding-bottom:22px;border-bottom:1px solid var(--line);margin-bottom:26px}.back{font-size:12px;color:#888;display:inline-block;margin-bottom:18px}.page h1{font-size:clamp(32px,4vw,44px);line-height:1.08;letter-spacing:-.045em;margin:0}.blank{min-height:300px}.blank-line{height:1px;background:var(--line);margin:22px 0}.blank-mark{color:#c8c8c8;font-size:12px;letter-spacing:.08em}footer{border:0;padding:0;margin-top:36px;color:#aaa;font-size:11px}
+
+.home-content{margin-top:28px;max-width:780px}.intro-section{padding:30px 0;border-top:1px solid var(--line)}.intro-section .eyebrow{margin-bottom:12px}.intro-section h2{font-size:clamp(25px,3vw,34px);letter-spacing:-.035em;line-height:1.15;margin:0 0 18px}.intro-section h3{font-size:17px;margin:25px 0 10px}.intro-section p{color:#383838;margin:0 0 14px;line-height:1.8}.intro-section ul,.intro-section ol{padding-left:22px;margin:10px 0 18px;color:#383838}.intro-section li{padding-left:4px;margin:0 0 10px;line-height:1.75}.info-note{padding:16px 18px;border:1px solid var(--line);border-radius:9px;background:#fafafa;margin:18px 0;color:#333;line-height:1.7}.script-box{border:1px solid var(--line);border-radius:10px;padding:16px;margin:14px 0;background:#fff}.script-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}.script-top strong{font-size:13px}.copy-btn{border:1px solid var(--line);border-radius:7px;background:#fff;padding:7px 10px;font-size:12px;white-space:nowrap}.copy-btn:hover{background:var(--soft)}.script-text{white-space:pre-wrap;color:#333;line-height:1.75}.pill-list{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.pill{padding:6px 10px;border:1px solid var(--line);border-radius:999px;font-size:12px;color:#555}.calc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}.calc label{display:block;font-size:12px;color:#666;margin-bottom:6px}.calc input,.calc select{width:100%;border:1px solid var(--line);border-radius:8px;padding:10px;background:white;font:inherit}.calc-result{padding:16px;border:1px solid var(--line);border-radius:10px;background:#fafafa;margin-top:12px}.calc-result strong{font-size:24px}.small-note{font-size:12px;color:#888}.section-anchor{scroll-margin-top:20px}@media(max-width:800px){.topline{display:flex;margin:0 0 24px;padding:0;border:0}.topline .site-byline{order:-1;margin-bottom:6px}.home-content:before{content:none}}@media(max-width:520px){.calc{grid-template-columns:1fr}.script-top{align-items:flex-start}}
+.mobile-top{display:none}.drawer{display:none}.overlay{display:none}.menu-toggle{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px}
+@media(max-width:800px){.shell{display:block}.sidebar{display:none}.drawer{display:block}.mobile-top{height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:1px solid var(--line)}.mobile-brand-wrap{display:flex;flex-direction:column;align-items:flex-start;min-width:0}.mobile-brand{font-size:17px;font-weight:750;letter-spacing:-.035em;line-height:1.05;white-space:nowrap}.brand-byline{display:block;padding:0;margin-top:5px;color:#888;font-size:12px;line-height:1.2;letter-spacing:0;font-weight:500}.mobile-byline{display:none}.mobile-top{gap:12px}.menu-btn{width:40px;height:40px;border:1px solid var(--line);border-radius:9px;background:#fff;display:grid;place-content:center;gap:5px}.menu-btn span{width:17px;height:2px;background:#111;display:block;border-radius:2px}.drawer{position:fixed;z-index:50;inset:0 auto 0 0;width:min(310px,86vw);padding:22px 15px;background:#fff;border-right:1px solid var(--line);transform:translateX(-105%);transition:transform .2s;overflow:auto}.drawer.open{transform:translateX(0)}.overlay.show{display:block;position:fixed;z-index:40;inset:0;background:#0006}.menu-btn{cursor:pointer}.menu-toggle:checked~.drawer{transform:translateX(0)}.menu-toggle:checked~.overlay{display:block;position:fixed;z-index:40;inset:0;background:#0006}.menu-toggle:checked~.mobile-top .menu-btn{background:var(--soft)}.main{padding:30px 22px 60px}.topline{display:none}.section-grid{grid-template-columns:1fr}.home h1{font-size:42px}.blank{min-height:220px}}
+
+/* Clean sections-only layout */
+.page-head{padding-bottom:0;border-bottom:0;margin-bottom:0}.page h1{margin-top:0}.main{min-height:100vh}
+
+.registration-link{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;font-weight:600}.registration-link:hover{opacity:.7}.registration-video-wrap{width:100%;margin:18px 0 10px;border-radius:12px;overflow:hidden;background:#111;border:1px solid var(--line)}.registration-video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#111}.registration-video-wrap a{color:inherit;text-decoration:underline}
+
+/* FAQ and objections accordion */
+.accordion-list{max-width:820px;margin-top:24px}
+.accordion-group-title{font-size:20px;letter-spacing:-.02em;margin:34px 0 12px}
+.accordion-item{border-bottom:1px solid var(--line)}
+.accordion-item:first-child{border-top:1px solid var(--line)}
+.accordion-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:17px 2px;font-weight:650;font-size:15px}
+.accordion-item summary::-webkit-details-marker{display:none}
+.accordion-item summary:after{content:'⌄';font-size:22px;line-height:1;color:#777;transition:transform .18s;flex:none}
+.accordion-item[open] summary:after{transform:rotate(180deg)}
+.accordion-content{padding:0 24px 18px 2px;color:#333;line-height:1.8;white-space:pre-line}
+.accordion-content p{margin:0 0 13px}
+.answer-variant{border:1px solid var(--line);border-radius:8px;padding:13px 15px;margin:10px 0;white-space:pre-line;background:#fff}
+.answer-variant strong{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#888;margin-bottom:6px}
+.accordion-note{font-size:13px;color:#666;background:#f7f7f7;border-radius:8px;padding:13px 15px;margin:18px 0;line-height:1.7}
+
+/* Interactive payout sliders */
+.payouts-wrap{max-width:820px;margin-top:24px}.payouts-intro{color:#555;margin:0 0 20px;line-height:1.7}.payout-calculator{border:1px solid var(--line);border-radius:13px;padding:23px;margin:0 0 16px;background:#fff}.payout-kicker{font-size:11px;font-weight:750;letter-spacing:.15em;color:#777}.payout-total{font-size:clamp(38px,6vw,54px);font-weight:800;letter-spacing:-.055em;line-height:1.15;margin-top:12px;font-variant-numeric:tabular-nums}.payout-caption{font-size:13px;color:#888;margin-top:3px}.range-label{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:28px;font-size:13px;color:#555}.range-label output{font-size:19px;font-weight:750;color:#111;font-variant-numeric:tabular-nums}.payout-range{display:block;width:100%;margin:17px 0 7px;accent-color:#111;cursor:pointer}.range-ticks{display:flex;justify-content:space-between;color:#999;font-size:11px}.payout-explanation{font-size:12px;line-height:1.65;color:#777;border-top:1px solid var(--line);margin-top:19px;padding-top:14px}@media(max-width:520px){.payout-calculator{padding:18px}.payout-total{font-size:42px}}
+
+</style></head>
+<body>
+<input aria-label="Открыть или закрыть меню" class="menu-toggle" id="mobileMenuToggle" type="checkbox"/>
+<div class="mobile-top"><div class="mobile-brand-wrap"><div class="mobile-brand">Outsiders Manual</div><div class="brand-byline">by traur</div></div><label aria-label="Открыть меню" class="menu-btn" for="mobileMenuToggle" id="menuOpen"><span></span><span></span><span></span></label></div>
+<label aria-label="Закрыть меню" class="overlay" for="mobileMenuToggle" id="overlay"></label>
+<aside class="drawer" id="drawer"><div class="brand"><small class="brand-byline">by traur</small>Outsiders Manual</div><div class="nav-label">Навигация</div><nav aria-label="Мобильная навигация" id="mobileNav"><a class="nav-link active" data-page="home" href="#home"><span>Главная</span></a>
+<a class="nav-link" data-page="registration" href="#registration"><span>Регистрация</span></a>
+<a class="nav-link" data-page="referrals" href="#referrals"><span>Рефералы</span></a>
+<a class="nav-link" data-page="models" href="#models"><span>Модели</span></a>
+<a class="nav-link" data-page="model-search" href="#model-search"><span>Поиск моделей</span></a>
+<a class="nav-link" data-page="questionnaire" href="#questionnaire"><span>Запись на собеседование</span></a>
+<a class="nav-link" data-page="model-questionnaire" href="#model-questionnaire"><span>Анкета для модели</span></a>
+<a class="nav-link" data-page="first-touch" href="#first-touch"><span>Первое касание</span></a>
+<a class="nav-link" data-page="faq" href="#faq"><span>Возражения и FAQ</span></a>
+<a class="nav-link" data-page="payouts" href="#payouts"><span>Выплаты</span></a></nav></aside>
+<div class="shell"><aside class="sidebar"><div class="brand"><small class="brand-byline">by traur</small>Outsiders Manual</div><div class="nav-label">Навигация</div><nav aria-label="Основная навигация" id="desktopNav"><a class="nav-link active" data-page="home" href="#home"><span>Главная</span></a>
+<a class="nav-link" data-page="registration" href="#registration"><span>Регистрация</span></a>
+<a class="nav-link" data-page="referrals" href="#referrals"><span>Рефералы</span></a>
+<a class="nav-link" data-page="models" href="#models"><span>Модели</span></a>
+<a class="nav-link" data-page="model-search" href="#model-search"><span>Поиск моделей</span></a>
+<a class="nav-link" data-page="questionnaire" href="#questionnaire"><span>Запись на собеседование</span></a>
+<a class="nav-link" data-page="model-questionnaire" href="#model-questionnaire"><span>Анкета для модели</span></a>
+<a class="nav-link" data-page="first-touch" href="#first-touch"><span>Первое касание</span></a>
+<a class="nav-link" data-page="faq" href="#faq"><span>Возражения и FAQ</span></a>
+<a class="nav-link" data-page="payouts" href="#payouts"><span>Выплаты</span></a></nav></aside>
+<main class="main">
+<section class="page active home" id="home">
+<div class="page-head"><h1>Главная</h1></div>
+<div class="home-content">
+<section class="intro-section">
+<div class="eyebrow">Знакомство</div>
+<h2>Твоя роль в агентстве</h2>
+<p>Ты являешься скаутом. Твоя основная задача - находить совершеннолетних девушек, заинтересованных в работе стримершей формата NON-NUDE, и помогать им пройти путь от первого сообщения до регистрации на платформе международного партнёра.</p>
+<p>Формат NON-NUDE означает трансляции без обнажения: разговорные эфиры, общение, демонстрация талантов и блоги. Важно честно объяснять условия и не обещать того, что не можешь гарантировать.</p>
+</section>
+<section class="intro-section">
+<div class="eyebrow">Подход к работе</div>
+<h2>Философия больших чисел</h2>
+<p>Скаутинг требует постоянства. Не каждый человек ответит или заинтересуется предложением, поэтому результат складывается из регулярных касаний, качественных диалогов и аккуратного сопровождения.</p>
+<h3>Ориентиры по воронке</h3>
+<ul>
+<li><strong>400 касаний</strong> - первые сообщения потенциальным кандидаткам.</li>
+<li><strong>300 ответов</strong> - люди, которые ответили на сообщение.</li>
+<li><strong>100 диалогов</strong> - содержательная переписка, а не только приветствие.</li>
+<li><strong>20 анкет</strong> - заполненные анкеты заинтересованных кандидаток.</li>
+<li><strong>5 регистраций</strong> - ориентировочный результат воронки, а не гарантия.</li>
+</ul>
+<div class="info-note">Отказы - обычная часть процесса. Не дави на человека и уважай отказ. Если собеседница не заинтересована, заверши диалог и переходи к следующему контакту.</div>
+<h3>Ежедневный план</h3>
+<p>Минимальный план - <strong>100 новых касаний в день</strong>. Это первые сообщения целевым совершеннолетним кандидаткам. При этом важны не только количество, но и качество сообщений и дальнейшего общения.</p>
+<ul>
+<li>200 касаний в день могут увеличить поток диалогов, если ты успеваешь качественно их вести.</li>
+<li>30 касаний - ниже установленного минимума.</li>
+<li>Отвечай на открытые диалоги своевременно и общайся естественно, без давления и спама.</li>
+</ul>
+</section>
+<section class="intro-section">
+<div class="eyebrow">Правила работы</div>
+<h2>KPI, отчётность и ответственность</h2>
+<h3>Ежедневный KPI</h3>
+<ul>
+<li><strong>100 новых первых касаний</strong> - отправленных сообщений целевым девушкам.</li>
+<li><strong>Ведение открытых диалогов</strong> - своевременные ответы и уважительное общение.</li>
+</ul>
+<h3>Правила отчётности</h3>
+<p>В рабочей Telegram-группе есть тема «Отчёты». Каждый день отправляй отчёт за текущие сутки через бота <strong>Outsiders Bot</strong>: внеси свои фактические цифры и отправь их.</p>
+<p>Дедлайн - <strong>03:00 по московскому времени</strong>. Если отчёт не отправлен до этого времени, день считается прогулом.</p>
+<h3>За что можно покинуть команду</h3>
+<ol>
+<li><strong>Игнор и отсутствие обратной связи.</strong> Если менеджер или руководитель обращается по рабочему вопросу, не оставляй сообщения без ответа. Не пропадай более чем на 36 часов без уважительной причины.</li>
+<li><strong>Отсутствие вовлечённости.</strong> Не ограничивайся формальным выполнением задач: анализируй диалоги, улучшай сообщения и задавай вопросы, когда что-то непонятно.</li>
+<li><strong>Ложные отчёты.</strong> Старые скриншоты, выдуманные касания и намеренное искажение цифр считаются серьёзным нарушением и могут привести к исключению из команды.</li>
+</ol>
+</section>
+<section class="intro-section">
+<div class="eyebrow">Коротко</div>
+<h2>Итоги первого блока</h2>
+<ul>
+<li><strong>Твоя задача:</strong> находить совершеннолетних кандидаток на NON-NUDE стриминг и помогать им пройти регистрацию.</li>
+<li><strong>Закон больших чисел:</strong> ориентир воронки - 400 касаний, 300 ответов, 100 диалогов, 20 анкет и 5 регистраций. Это ориентир, а не обещание результата.</li>
+<li><strong>Ежедневный KPI:</strong> минимум 100 новых касаний и качественная работа с открытыми диалогами.</li>
+<li><strong>Отчёт:</strong> отправляй через Outsiders Bot до 03:00 МСК.</li>
+<li><strong>Связь и честность:</strong> отвечай по рабочим вопросам, не пропадай без причины и указывай только реальные цифры.</li>
+</ul>
+</section>
+</div>
+</section>
+<section class="page" id="registration">
+<div class="page-head"><a class="back" href="#home">← Главная</a><h1>Регистрация</h1></div>
+<div class="home-content" style="margin-top:0">
+<section class="intro-section" style="border-top:0;padding-top:0">
+<p>Следуй инструкции ниже, чтобы правильно пройти регистрацию.</p>
+<h3>1. Переход в бота</h3>
+<p>Переходим в бота по ссылке: <a class="registration-link" href="https://t.me/goatcrmbot?start=7733089903" target="_blank" rel="noopener noreferrer">Открыть бота</a></p>
+<p>Если тебя пригласил другой агент, используй его ссылку, чтобы реферал засчитался ему.</p>
+<h3>2. Регистрация</h3>
+<p>Следуй инструкциям в видео ниже и внимательно заполняй все данные.</p>
+<div class="registration-video-wrap">
+<video class="registration-video" controls playsinline preload="metadata" aria-label="Видеоинструкция по регистрации">
+<source src="https://goatsagency.com/media/regbot.mp4" type="video/mp4">
+Твой браузер не поддерживает воспроизведение видео. <a href="https://goatsagency.com/media/regbot.mp4" target="_blank" rel="noopener noreferrer">Открыть видео отдельно</a>.
+</video>
+</div>
+<div class="small-note">Видеоинструкция · regbot.mp4</div>
+</section>
+</div>
+</section>
+<section class="page" id="models">
+<div class="page-head"><h1>Модели</h1></div>
+<div class="home-content" style="margin-top:0">
+<section class="intro-section" style="border-top:0;padding-top:0">
+<h2>Требования к девушке</h2>
+<p>Вот чек-лист лида , который нам нужен:</p>
+<h3>1. <strong>Внешность:</strong></h3>
+<p>Формат стримов — <strong>NON-NUDE</strong> то есть строго разговорные трансляции, блоги, гейминг, общение, никакого обнажения. Требования максимально мягки в этом плане , просто обычная девушка , но и супермодели приветствуются. <strong>Стоп-фильтр:</strong> Девушки с сильным избыточным весом или откровенно неухоженные. Они банально не соберут донаты , а такие никому не нужны</p>
+<h3>2. <strong>Возрастной ценз и документы:</strong></h3>
+<p>Строго <strong>от 18 до 27 лет</strong>. Меньше — даже не рассматриваются. Старше — рассматриваются в редких случая если внешний вид компенсирует. У девушки <strong>обязательно</strong> должен быть паспорт (загран-пасспорт или ID-карта) для верификации. Нет документов — не получится устроить ее на работу , партнер её не зарегистрирует.</p>
+<h3>3. <strong>География (ГЕО):</strong></h3>
+<p>В приоритете — <strong>СНГ</strong> (Казахстан, Россия, Беларусь, Узбекистан, Кыргызстан и т.д.). У них понятный менталитет , с ними проще всего выстроить доверие. Рассматриваем любое ГЕО , кроме стран Африки так как чернокожие девушки не проходят по текущим критериям нашего партнера.</p>
+<h3>4. <strong>Пример лида:</strong></h3>
+<p>девушка 21 год , Россия , ведет соцсети/или же обычная девушка , имеет телефон и/или ноутбук , свободна 3+ часа в день в , любит общение и стримы. <em>Может отличаться от раза к разу , главное соблюдать вышеуказанные требования</em></p>
+<h2>Как правильно вести диалог и выстраивать доверие</h2>
+<p>Люди ненавидят, когда им что-то навязчиво впаривают. Но они обожают хвататься за возможности, которые кажутся им дефицитными. Ты должен мастерски владеть обеими методиками ниже и переключать их на ходу.</p>
+<h3>Регламент общения с девушками из ботов для знакомств и Instagram</h3>
+<p>Здесь ты заходишь с женской анкеты , которая выглядит так: возраст 20-22 года , город любой , обычная симпатичная девушка , но не супермодель..</p>
+<p>Твоя цель — общаться с девушками 1–2 дня, войти в максимальное доверие как близкая интернет-подруга, а затем включить чистую психологию , чтобы она сама умоляла взять её на работу..</p>
+<h3>Шаг 1. Вход в доверие</h3>
+<p>Обычный живой трёп. Обсуждаете парней, шмотки, учебу, то, как задолбала рутина и отсутствие денег. Ты должна звучать как реальная, простая девчонка. Ни слова о работе!.</p>
+<h3>Шаг 2. Зависть и интрига</h3>
+<p>На второй день ты как бы между делом то бишь нативно вбрасываешь в диалог свой лайфстайл. Пример: «Извини , что долго отвечаю , я просто тут сижу на стриме , за эту неделю заработала больше обычного , сижу выбираю шмотки теперь, голова кругом уже ахаахах».</p>
+<h3>Шаг 3. Продажа без продажи</h3>
+<p>Девчонка неизбежно спросит: «Ого, а что за стримы? Вебкам? Онлифанс?». Твой ответ должен мгновенно снять страх.
+Твой ответ: «Да не , ты чё , какой вебкам , я себя на помойке не находила) Обычные стримы просто за зарплату. Потом дальше когда расспрашивает , что и как отвечаешь по типу такого: «Ну нам платят за то , что мы по сути раскручиваем новые площадки типо твича плюс еще донатики кидают»..</p>
+<h3>Шаг 4. Искусственный дефицит</h3>
+<p>Ты не зовешь её работать. Ты делаешь так, чтобы она сама попросилась. Твой ответ: «Блин, у нас там щас как раз вроде одно место свободное было в группу к моему менеджеру. Если хочешь, я могу спросить у своего руководителя, чисто по-випски замолвить словечко , мож тебя возьмут , попробуешь себя»..</p>
+<section class="intro-section">
+<h2>Регламент работы с девушками со стриминговых площадок и инфлюенсерами</h2>
+<p>На таких площадках у нас нет времени дружить днями. Мы работаем уже как серьёзное агентство, а не подружка, предлагающая классную работу. Твоя задача — делить аудиторию на два лагеря и бить точно в цель.</p>
+<h3>Первое направление: Обычные девушки-блогеры — холодный лид</h3>
+<ol>
+<li><strong>Первое касание пастой:</strong> Закидываем чёткий, красивый текстовый скрипт о деловом предложении вакансии — ведущей/стримерши для крупного международного партнёра. Чётко обозначаем: свободный график, оплачиваемая стажировка, высокий заработок.</li>
+<li><strong>Живая отработка:</strong> Как только она проявляет интерес или базовый страх по типу «А это безопасно?», «А что надо делать?», «Это же вебкам». Ты отключаешь режим робота. Переходи на живое, уверенное общение. Разжёвывай, что это как стримы на Твиче или в Тиктоке, только с гарантированным доходом от агентства. Держи позицию сверху — ты работодатель, ты даёшь возможность и настроен на долгосрочное сотрудничество.</li>
+</ol>
+<h3>Второе направление: Те, кто уже был в теме — OnlyFans, модели, вебкам — целевые девушки</h3>
+<p>Это самый сочный трафик. Они уже знают, что такое монетизация внешности, их не надо учить общаться. Но они устали от грязи или вечного поиска трафика.</p>
+<ol>
+<li><strong>Тон общения:</strong> С ними говорим на одном языке. Без детских сказок и лишних прелюдий. Чётко, профессионально, как эксперт с экспертом.</li>
+<li><strong>Твоё УТП, то есть уникальное торговое предложение:</strong> Твой главный аргумент для них — <strong>высокая и стабильная доходность + готовый системный трафик партнёра.</strong> Суть разговора: «Слушай, я вижу, ты в теме. Зачем тебе сливать нервы на OF или упираться в постоянный поиск трафика? Наш партнёр даёт готовые международные платформы, где трафик системный. Формат — строго NON-NUDE. Сидишь в комфорте, доход в долларах выше и постоянный, а заморочек меньше. Давай свяжу с менеджером, обсудите условия контракта» — и после переводишь её на диалог в ТТ на свой юз под видом менеджера.</li>
+</ol>
+<section class="intro-section">
+<h2>Финализация диалога: Как забрать анкету</h2>
+<p>После того как ты прошел через этапы входа в доверие или делового УТП и получил от девушки принципиальное «да» , твоя задача — не слить её на этапе передачи данных.</p>
+<ul>
+<li><strong>Правило «Минимального сопротивления»:</strong> Не требуй от неё заполнения огромных форм. Вся работа по передаче данных должна выглядеть для неё максимально просто и безопасно.</li>
+</ul>
+<h3>Твой алгоритм действий</h3>
+<ol>
+<li><strong>Как выглядит анкета:</strong>  • Имя • город • Номер телефона • Возраст • Проживание: одна/не одна • Есть 2 мобильных телефона или комп + телефон? • Модель устройства • Сколько часов и дней в неделю готова уделять работе? • Есть наушники? • Телеграм для связи • Фото.</li>
+<li><strong>Как правильно ее собрать с обычной девушки:</strong> ни в коем случае не кидать ее на заполнение в лоб - это пугает и отталкивает. Говорим - тут нужно будет парочку моментиков уточнить , не затруднит? и задаем вопросы по ходу живого диалога.</li>
+<h3>Как уточнить каждый пункт</h3>
+<p><strong>Имя</strong> - его мы узнаем на самом старте общения , тут все ясно.</p>
+<p><strong>Номер телефона</strong> — лучше всего пробить в боте по типу Шерлока/Глаз бога. Если это не получается спрашиваем его через метод описанный в начале этого пункта , если спрашивает "А зачем номер?" , парируем следующим образом "тг сейчас блокируют , это нужно , что бы в случае чего не потерять с тобой связь)".</p>
+<p><strong>Возраст</strong> — узнаем также на старте общения либо он вообще есть: в соцсети или же в анкете Бибинто/ДВ.</p>
+<p><strong>Город</strong> — также , если Бибинто и ДВ то скорее всего указан , если нет то спрашивает «Я с "Город" , а ты откуда?».</p>
+<p><strong>Проживание</strong> — об этом мы узнаем в ходе общения с девушкой , болтая с ней обо всем можно завести следующую тему "блиин , так уже надоело с подругой жить , иногда так хочется одной побыть" - начинаете общаться на эту тему и после задаешь вопрос , что то в роде "а ты одна живешь или тоже как я страдаешь?(" и вуаля , ответ получен.</p>
+<p><strong>Наушники и техника</strong> — Это можно сделать уже когда подводите итог и якобы передаете ее кандидатуру менеджеру либо же таким же образом по ходу диалога. Завести тему об играх и узнавать есть ли у нее компьютер и ТД. пример "а ты в игры играешь? я просто обожаю" условно ответит "Да нет как то" - спрашиваешь почему и там уже скорее всего получишь ответ , что нет ПК. Но как я сказал выше эти вопросы про технику можно и задать в лоб когда она уже хочет начать работать.</p>
+<p><strong>Часы в день, фото и Telegram</strong> — это уже легко , также на этапе передачи ее кандидатуры запрашиваем эти пункты. Но фото также нужно требовать аккуратно , если у нее есть оно в соцсетях , сторисах в тг или в анкете - лучше всего брать оттуда , если нет то просим его , в случае вопросов для чего это отвечаем , что то около этого "что бы выстроить контент план под твой типаж личности)".</p>
+</li>
+<li><strong>Назначение собеседования и передача наставнику (@epilepc):</strong> Как только она заполнила данные говоришь ей "ну все готово , осталось подобрать время для коротенького собеседования где ты обсудишь условия и поймешь - все ли тебе подходит" Узнаешь удобное ей время и назначаешь. Делаем отпись наставнику (мне) кидаем анкету и делимся результатами чтобы я был в курсе</li>
+</ol>
+</section>
+
+<section class="intro-section">
+<h2>Реанимация и утилизация: что делать , если модель пропадает или сливается</h2>
+<ol>
+<li><em>В процессе работы ты неизбежно столкнешься с тем , что девушки , которые еще вчера горели желанием работать , начинают пропадать , читать и молчать , кормить завтраками по типу - «ой , я занята» , «давай позже» или откровенно сливаться перед самым собеседованием.</em></li>
+<li><em>Твой алгоритм действий в этой ситуации делится на два четких этапа: <strong>попытка камбэка</strong> и <strong>безжалостная отсечка</strong>.</em></li>
+<li><strong>Шаг 1. Скрипт «Реанимации» через искусственный дефицит:</strong> Если девушка прочитала твое сообщение о собеседовании/анкете и молчит больше 4-6 часов , либо начинает сомневаться — мы не умоляем её и не бегаем за ней. Мы включаем психологию дефицита и ценности места. Ты пишешь ей со своей женской анкеты-подруги:</li>
+<li>Просто пример , нужно писать самому и более короткими , живыми сообщения. «Маш , привет! Я тут у руководителя спросила , он подтвердил время на завтра, но сказал , что если до вечера не зафиксируем , то место отдадут девочке из резерва (там просто очередь большая на это ГЕО). Ты как , успеваешь? А то обидно будет , если место прогорит , я еле выбила его для тебя(»</li>
+<li><strong>Почему это работает:</strong> Мы убираем позицию нуждающегося. Теперь не тебе нужно , что бы она пришла , а ей нужно успеть запрыгнуть в последний вагон , пока её место не отдали другой.
+<ul><li>Включается дружеское давление: ей становится неловко подводить тебя - «подругу» , которая за неё замолвила словечко.</li></ul></li>
+<li><strong>Шаг 2. Правило 24 часов и Утилизация:</strong> Если после реанимационного скрипта девушка продолжает молчать , придумывает нелепые отговорки второй раз подряд или просто игнорит сутки — для тебя этого лида больше <strong>не существует</strong>.
+<ul><li><strong>Запомни:</strong> Топовый скаут никогда не сидит и не ждет «ту самую Машу». Пока ты тратишь ментальную энергию на переживания из-за одного слива , твоя воронка простаивает.</li>
+<li><strong>Действие:</strong> Закрыл диалог , удалил вкладку, забыл. Твой локус контроля говорит: «Да я где то не дожал , да я где то не качественно вошел в доверие , но сейчас самым эффективным решением будет - проанализировать ошибки и идти дальше».</li></ul></li>
+<li><strong>Твоя задача — не лечить мертвых лидов , а гнать новый трафик</strong> и качественно его обрабатывать. Берешь , запускаешь цепочку «Боты → Инста» заново , делаешь свои 30 новых касаний и забираешь тех, кто готов делать деньги прямо сейчас.</li>
+</ol>
+</section>
+<section class="intro-section">
+<h2>Сопровождение до собеседования</h2>
+<p>Твоя задача — не просто получить анкету, а превратить её в готового сотрудника. Если ты бросишь её сразу после получения данных , она поймет , что всё общение было лишь втиранием в доверие , и сольется. Ты должен вести её за руку до самого собеседования , но при этом не забывать , что ты подружка для нее и лишь потом вы обсуждаете работу. Об этом я также упоминал в итоге к прошлому блоку</p>
+<h3>1. Правило «Эмоционального моста»</h3>
+<p>Сбор анкеты — это не конец , а <strong>кульминация вашего общения</strong>.</p>
+<ul>
+<li><strong>Как записать ее на собеседование:</strong> «Слушай, глянула твою анкету , ты реально подходишь. Давай я сейчас сама всё оформлю и запишу тебя на завтра на собес с нашим руководством , чтобы точно место закрепить, а то у нас девчонки в очередь стоят. Удобно будет завтра в XX:XX в зуме?».</li>
+<li><strong>Важно:</strong> Ты делаешь это как подруга , которая помогает ей пробиться сквозь очередь.</li>
+</ul>
+<h3>2. Поддержание роли</h3>
+<p>После того как анкета у тебя в руках, <strong>не меняй стиль общения</strong>.</p>
+<ul>
+<li><strong>Ошибка:</strong> Становиться официальным, отвечать «Принято» , «Ждите» или вовсе прекращать ей писать.</li>
+<li><strong>Как надо:</strong> После этого продолжать с ней дружеское общение на отвлеченные темы , не выходить из своей роли иначе она все поймет и не придет на собеседование. Про него кстати напоминаешь лишь изредка.</li>
+</ul>
+<h3>3. «Технический» прогрев перед собесом</h3>
+<p>Чтобы она не испугалась и не «отвалилась» в последний момент, сделай её подготовку легкой:</p>
+<ul>
+<li><strong>Подготовка:</strong> «Смотри, там ребята будут задавать пару простых вопросов , ничего сложного — просто пообщаетесь , чтобы понять , какой график тебе удобнее. Главное , будь на связи и с хорошим настроением)».</li>
+<li><strong>Напоминание:</strong> За 1-2 часа до назначенного времени обязательно «подбодри» её , как подруга: «Привет! Ну что, готова к старту? Не нервничай, там всё просто. интервьюер скоро выйдет на связь».</li>
+</ul>
+<h3>4. Почему это работает:</h3>
+<ul>
+<li><strong>Отсутствие чувства обмана:</strong> Она не чувствует себя брошенной или «проданной». Для неё всё выглядит так, будто ты реально ей помогаешь.</li>
+<li><strong>Социальное давление:</strong> Ей уже неловко слиться , потому что она обещала <em>тебе</em> (подруге) , а не абстрактному «агентству».</li>
+<li><strong>Контроль ситуации:</strong> Ты видишь, на каком этапе она находится , и можешь дожать её , если она начинает тупить или бояться.</li>
+</ul>
+</section>
+</section>
+<section class="intro-section">
+<h2>Удержание и сопровождение (Retention)</h2>
+<p>Твоя работа не заканчивается после собеседования. Твоя задача — сделать так , чтобы модель <strong>закрепилась в агентстве</strong> и начала работать в долгую.</p>
+<ul>
+<li><strong>«Период адаптации» (Первая неделя):</strong> Это самый опасный момент. Девушка может столкнуться с первыми трудностями , например , не получается эфир , страшно , мало донатов. Твоя задача — мониторить её состояние.
+<ul><li><em>«Привет! Ну как прошла первая смена? Не переживай, если что-то не сразу получилось — это норма, я в первые дни вообще кнопку включения искала) Пиши , если будут вопросы , я рядом».</em></li></ul>
+</li>
+<li><strong>Психологическая «подпитка»:</strong> Если модель говорит «мне сложно» , «я ничего не заработала» , <strong>не давай ей уйти в минус</strong>.
+<ul><li><em>«Слушай, на старте это всегда так. Помнишь , я говорила? Главное — не бросать. Давай попробуем поменять подход/время/тему эфира? Давай обсудим , что не идет».</em></li></ul>
+</li>
+<li><strong>Превращение в «своего человека»:</strong> Не меняй роль , ты все еще подруга , просто вам теперь связывает еще работа - не пиши ей только по работе и о работе , придумывай свои ситуации из жизни и рассказывай о них , общайся дальше как и до устройства ее на работу. Помогай ей чувствовать себя частью коллектива. Делись успехами других , поддерживай её настрой. Чем больше она чувствует, что ты в одной лодке с ней , тем меньше шансов , что она уйдет в другое агентство или сольется из-за лени.</li>
+<li><strong>Почему это выгодно тебе:</strong> Модель , которая работает месяцами — это твой пассивный доход и стабильность. Относись к ней как к инвестиции своего времени. <strong>Одна лояльная модель стоит десяти новых, которых нужно искать с нуля.</strong></li>
+</ul>
+</section>
+</div>
+</section>
+<section class="page" id="model-search">
+<div class="page-head"><h1>Поиск моделей</h1></div>
+<p>Основные источники для поиска: дейтинг-боты, TikTok, Instagram, Discord и Threads. У каждого источника своя аудитория и свои особенности. Не зацикливайтесь на одной площадке, тестируйте разные варианты и отмечайте, откуда приходят лучшие отклики.</p>
+<h2>1. Дейтинг-боты</h2>
+<p>Боты для знакомств можно использовать для поиска совершеннолетних девушек, которым потенциально может быть интересна работа моделью. Сначала изучите площадку и её правила, затем общайтесь с подходящими кандидатами без массового спама.</p>
+<p><strong>Боты для поиска моделей:</strong></p>
+<ul>
+<li><a href="https://t.me/bibinto_bot" target="_blank" rel="noopener noreferrer">@bibinto_bot</a></li>
+<li><a href="https://t.me/leomatchbot" target="_blank" rel="noopener noreferrer">@leomatchbot</a></li>
+<li><a href="https://t.me/xo_xo" target="_blank" rel="noopener noreferrer">@xo_xo</a></li>
+<li><a href="https://t.me/ashqua_bot" target="_blank" rel="noopener noreferrer">@ashqua_bot</a></li>
+<li><a href="https://t.me/mimoletbot" target="_blank" rel="noopener noreferrer">@mimoletbot</a></li>
+<li><a href="https://t.me/DategramAppBot" target="_blank" rel="noopener noreferrer">@DategramAppBot</a></li>
+<li><a href="https://t.me/blurrr_dating_bot" target="_blank" rel="noopener noreferrer">@blurrr_dating_bot</a></li>
+</ul>
+<h2>2. TikTok</h2>
+<p>TikTok можно использовать для поиска девушек, которые сами проявляют интерес к модельной сфере, а также для изучения тематического контента.</p>
+<p><strong>Что можно делать:</strong></p>
+<ul>
+<li>Искать видео по запросам «модельное агентство» и похожим темам.</li>
+<li>Изучать профили авторов и их открытый контент.</li>
+<li>Использовать поиск по хештегам и комментариям.</li>
+<li>Развивать собственный аккаунт и привлекать заинтересованных кандидатов через контент.</li>
+<li>Отслеживать, какие темы и форматы дают больше откликов.</li>
+</ul>
+<h2>3. Instagram</h2>
+<p>Instagram подходит для поиска через открытые профили, тематические хештеги, Reels и комментарии.</p>
+<p><strong>На что обратить внимание:</strong></p>
+<ul>
+<li>Тематика и интересы автора.</li>
+<li>Открытые публикации и описание профиля.</li>
+<li>Интерес к модельной сфере, съёмкам или стримингу.</li>
+<li>Возможность начать обычный, уважительный диалог без навязчивых сообщений.</li>
+</ul>
+<h2>4. Discord</h2>
+<p>В Discord можно изучать тематические серверы и открытые каналы, где пользователи делятся фотографиями, общаются и находят единомышленников.</p>
+<p><strong>Что делать:</strong></p>
+<ul>
+<li>Искать подходящие сообщества по тематике.</li>
+<li>Изучать правила сервера и ограничения на личные сообщения.</li>
+<li>Участвовать в общении и знакомиться с людьми естественно.</li>
+<li>Предлагать информацию о работе только тем, кому это действительно может быть интересно.</li>
+</ul>
+<p>Например, можно изучать серверы с активными сообществами и тематическими каналами, в том числе каналы вроде <code>#селфи</code>. Перед использованием конкретного сервера проверьте его правила и актуальность.</p>
+<h2>5. Threads</h2>
+<p>Threads можно использовать для поиска через тематические публикации, обсуждения, ответы и хештеги.</p>
+<p><strong>Что делать:</strong></p>
+<ul>
+<li>Искать публикации на темы моделинга, съёмок и удалённой работы.</li>
+<li>Изучать открытые обсуждения и профили авторов.</li>
+<li>Участвовать в тематических дискуссиях.</li>
+<li>Отвечать на вопросы по существу и знакомить заинтересованных людей с возможностью работы.</li>
+</ul>
+<h2>Дополнительно</h2>
+<p>Это основные источники трафика, которые часто используются для поиска моделей. Но не ограничивайтесь только ими: вы можете найти собственные способы поиска, тестировать новые площадки и использовать те источники, которые лучше работают именно у вас.</p>
+<p>Главное — пробовать разные подходы, анализировать результаты и постепенно находить наиболее эффективные для себя варианты.</p>
+</section>
+<section class="page" id="questionnaire">
+<div class="page-head"><h1>Запись на собеседование</h1></div>
+<h2>Как оставить заявку для модели</h2>
+<p>Пошаговая инструкция</p>
+<h3>1. Открываем HuntMe CRM</h3>
+<p>Открываем huntmecrm.com и переходим к созданию заявки.</p>
+<h3>2. Создаём заявку</h3>
+<p>Выбираем раздел «Заявки» → «Добавить заявку».</p>
+<h3>3. Выбираем тип заявки</h3>
+<p>Выбираем «Модель» → «Команда» (не «Соло») и вводим код команды:</p>
+<p><strong>6a0ac9ff4710a</strong></p>
+<h3>4. Выбираем компанию</h3>
+<p>Выбираем любую компанию с пометкой RU и смотрим, где есть ближайшее свободное окно для собеседования.</p>
+<h3>5. Заполняем данные модели</h3>
+<p>Заполняем все данные о модели и прикрепляем фотографии. Желательно добавить фото в полный рост. Можно использовать селфи, если по нему можно оценить внешность модели.</p>
+<h3>6. Заполняем дополнительную информацию</h3>
+<p>Указываем модель телефона, живёт ли модель одна или есть ли свободная комната, насколько гибкий у неё график, а также её Telegram-юзернейм.</p>
+<h3>7. Отправляем заявку</h3>
+<p>Даём согласие и отправляем лиду автоматическое сообщение.</p>
+<h3>8. Заполняем анкету в боте</h3>
+<p>Заходим в бота <a href="https://t.me/goatcrmbot" target="_blank" rel="noopener noreferrer">@goatcrmbot</a>, нажимаем кнопку «Заполнить анкету», выбираем, откуда пришёл лид, и заполняем анкету.</p>
+<p>Готово.</p>
+</section>
+<section class="page" id="model-questionnaire">
+<div class="page-head"><h1>Анкета для модели</h1></div>
+<p>Перед записью на собеседование уточни у модели следующие данные.</p>
+<h3>1. Имя</h3>
+<p>Уточни имя модели.</p>
+<h3>2. Дата рождения</h3>
+<p>Формат: ДД.ММ.ГГГГ.</p>
+<h3>3. Номер телефона</h3>
+<p>Укажи актуальный номер для связи.</p>
+<h3>4. Telegram</h3>
+<p>Уточни Telegram-юзернейм модели.</p>
+<h3>5. Фото в полный рост</h3>
+<p>Попроси фото в полный рост, только если в профиле нет подходящего снимка.</p>
+<h3>6. Сколько часов и дней готова уделять работе в неделю?</h3>
+<p>Уточни, сколько часов за смену и сколько дней в неделю модель готова работать.</p>
+<p>Минимальная продолжительность смены 6 часов. Если модель никак не может уделять работе столько времени, сразу скип.</p>
+<h3>7. Проживание: одна / не одна</h3>
+<p>Уточни, есть ли комната, где никто не будет беспокоить, и проживает ли модель одна или с кем-то.</p>
+<h3>8. Устройство для работы</h3>
+<p>Уточни модель устройства, с которого девушка будет работать.</p>
+<p>Подходящие устройства:</p>
+<ul>
+<li>iPhone 11 и новее.</li>
+<li>Android 2023 года выпуска и новее.</li>
+<li>Флагманские устройства 2022 года выпуска и новее.</li>
+<li>Ноутбук или ПК с веб-камерой.</li>
+</ul>
+<h3>9. Уровень английского</h3>
+<p>Уточни уровень английского языка. Если модель не знает английский или знает его слабо, ничего страшного – берём.</p>
+<h3>10. Наушники</h3>
+<p>Уточни, есть ли у модели наушники.</p>
+<h3>11. Рост и вес</h3>
+<p>Уточни рост и вес. Если подходящее фото уже есть, можно ориентировочно оценить эти параметры по нему.</p>
+<h3>12. Время собеседования</h3>
+<p>Уточни, в какое время модели удобно пройти онлайн-собеседование.</p>
+<p>После сбора информации можно переходить к оформлению заявки в HuntMe CRM.</p>
+</section>
+<section class="page" id="first-touch">
+<div class="page-head"><h1>Первое касание</h1></div>
+<div class="home-content">
+<p>Первое касание — это первое сообщение девушке, с помощью которого мы знакомимся, вызываем интерес к предложению и стараемся получить ответ.</p>
+<h2>Основные правила</h2>
+<ul>
+<li>Пиши дружелюбно и естественно, не перегружай сообщение лишней информацией.</li>
+<li>Используй разные варианты сообщений, чтобы не писать всем один и тот же текст.</li>
+<li>Кратко объясняй суть работы, не оставляя ложных ожиданий.</li>
+<li>Не дави на человека. Если ей неинтересно, спокойно принимай отказ.</li>
+<li>Не отправляй сразу много сообщений подряд.</li>
+</ul>
+<p>Примеры ниже можно использовать как есть или переделывать под себя. Меняй формулировки, добавляй что-то от себя и подстраивай сообщение под конкретного человека. Главное, чтобы оно звучало естественно и сохраняло смысл предложения.</p>
+<h2>Примеры первых касаний</h2>
+<p>Ниже представлены три варианта сообщений.</p>
+<div class="script-box"><div class="script-top"><strong>Пример 1</strong><button class="copy-btn" type="button" data-copy="приветик! 
+
+у меня есть к тебе предложение. если интересно - расскажу подробнее. если нет, ничего страшного. мы ищем ведущую эфиров для разговорных и рекламных видео на платформах по типу Twitch (не вебка не онлик!). конечно это оплачивается ежедневно и будут приходить товары для рекламы, в основном косметика. зп 5-7к за смену, с рекламой 10-15. еще привествуется наличие хобби, как тебе такая идея 
+
+от 18 лет ">Копировать</button></div><div class="script-text">приветик! 
+
+у меня есть к тебе предложение. если интересно - расскажу подробнее. если нет, ничего страшного. мы ищем ведущую эфиров для разговорных и рекламных видео на платформах по типу Twitch (не вебка не онлик!). конечно это оплачивается ежедневно и будут приходить товары для рекламы, в основном косметика. зп 5-7к за смену, с рекламой 10-15. еще привествуется наличие хобби, как тебе такая идея 
+
+от 18 лет </div></div>
+<div class="script-box"><div class="script-top"><strong>Пример 2</strong><button class="copy-btn" type="button" data-copy="Приветик Увидела твою страничку , мне кажется, тебе могла бы подойти наша
+работа. Это лайв-стриминг: нужно просто болтать на эфирах, без интима и вебкама.
+Работа полностью удаленная, график гибкий. По оплате выходит около 4–8к за
+смену.
+
+Напиши мне, если хочешь узнать подробности, буду рада пообщаться ">Копировать</button></div><div class="script-text">Приветик Увидела твою страничку , мне кажется, тебе могла бы подойти наша
+работа. Это лайв-стриминг: нужно просто болтать на эфирах, без интима и вебкама.
+Работа полностью удаленная, график гибкий. По оплате выходит около 4–8к за
+смену.
+
+Напиши мне, если хочешь узнать подробности, буду рада пообщаться </div></div>
+<div class="script-box"><div class="script-top"><strong>Пример 3</strong><button class="copy-btn" type="button" data-copy="приветик!  извини, что пишу неожиданно, хотела кое-что спросить:
+
+ты когда-нибудь задумывалась о том, чтобы попробовать себя в стриминге? я сейчас ищу девушек для стримов на зарубежных платформах, похожих на twitch. это обычные разговорные эфиры из дома, без интима. оплата от 100$ до 150$ за смену, а с рекламой можно получать до 200$ 
+
+если тебе интересно, напиши мне, с радостью расскажу подробнее ">Копировать</button></div><div class="script-text">приветик!  извини, что пишу неожиданно, хотела кое-что спросить:
+
+ты когда-нибудь задумывалась о том, чтобы попробовать себя в стриминге? я сейчас ищу девушек для стримов на зарубежных платформах, похожих на twitch. это обычные разговорные эфиры из дома, без интима. оплата от 100$ до 150$ за смену, а с рекламой можно получать до 200$ 
+
+если тебе интересно, напиши мне, с радостью расскажу подробнее </div></div>
+<h2>Что делать после отправки</h2>
+<p><strong>Если девушка ответила и заинтересовалась:</strong> продолжай диалог, ответь на её вопросы и расскажи подробнее об условиях работы.</p>
+<p><strong>Если девушка не ответила:</strong> не торопись отправлять повторное сообщение. Позже можно сделать повторное сообщение. Пример: «Жду вашего ответа »</p>
+<p><strong>Если девушка отказалась:</strong> поблагодари за ответ и не настаивай.</p>
+<p>Главная задача первого касания – начать диалог. Не нужно пытаться рассказать абсолютно всё в одном сообщении.</p>
+</div></section>
+<section class="page" id="faq">
+<div class="page-head"><h1>Возражения и FAQ</h1></div>
+<div class="accordion-list">
+<h2 class="accordion-group-title">FAQ</h2>
+<details class="accordion-item"><summary>О компании</summary><div class="accordion-content"><p>Мы продюсерский центр, который занимается раскруткой и продвижением различных проектов и онлайн сервисов, на рынке существуем уже более 4х лет. Началось все в период пандемии, когда многие люди сидели дома. Наша компания встала на путь создания контента, не смотря на высокую конкуренцию, мы стабильно закрепились на рынке и заработок наших сотрудников увеличился практически в два раза.</p><p><strong>Коллектив</strong></p><p>Коллектив на данный момент насчитывает свыше 100 человек. Возрастом от 18 до 30 лет. То есть все ребята молодые творческие, дружные, амбициозные. Часто проходят различные мероприятия: корпоративы, вечеринки, в общем скучать не приходится. Руководство у нас лояльное, если возникают вопросы/проблемы, идет навстречу и находит компромисс.</p></div></details>
+<details class="accordion-item"><summary>Знание английского</summary><div class="accordion-content">Насчет английского не переживай, наши опытные сотрудники помогут, чтобы работа происходила наиболее эффективно.</div></details>
+<details class="accordion-item"><summary>График</summary><div class="accordion-content">Ты сможешь выбрать удобный для себя график, который в дальнейшем будешь выстраивать каждую неделю на неделю вперед. В целом очень удобно и комфортно, потому что коллектив молодой у кого-то учеба, у кого-то дополнительные проекты — прекрасно получается совмещать.</div></details>
+<details class="accordion-item"><summary>Стажировка</summary><div class="accordion-content">Стажировка у нас занимает 3 дня, по 7 часов, туда уже включен перерыв на полчаса, на котором ты сможешь пообщаться с нашим коллективом, покушать и просто отдохнуть. Стажировка оплачивается, поскольку мы ценим время, потому что стажировка это та же самая работа, оплата происходит в тот же день, а в дальнейшем в основном штате раз в неделю. Выплаты на момент стажировки у нас варьируются до 3к в день, это в среднем, бывает конечно больше, бывает чуть меньше.</div></details>
+<details class="accordion-item"><summary>Обязанности</summary><div class="accordion-content">К нам приходит заказ на раскрутку какой-то новой платформы, она не такая известная и наша задача сделать ее более популярной и монетизированной путем продвижения личного бренда каждого сотрудника. Мы в свою очередь закупаем рекламу на сторонних ресурсах, оплачиваем промо-период, а дальше уже задача ложится на тебя:
+
+в обязанности будет входить ведение прямых эфиров участие в фото- видеосъемках для оформления конвента, рекламы, социальных сетей акаунтов. Продумывание контент плана и тесное сотрудничество с нашей командой по продвижению и креативу. Главная задача заинтересовать аудиторию и оставить на площадке, которую мы продвигаем.</div></details>
+<details class="accordion-item"><summary>Контент</summary><div class="accordion-content">Темы могут быть абсолютно разные например книги фильмы музыка сериалы путешествия искусство. Также можно монетизировать свои хобби. У нас многие танцуют, поют, играют на музыкальных инструментах, рисуют. В целом помогая нашей компании, продвигаешь себя и свои увлечения.</div></details>
+<details class="accordion-item"><summary>Куратор</summary><div class="accordion-content">Во всем на всех этапах тебе помогает твой продюсер, он все показывает объясняет и находится рядом. У продюсера также есть своя креативная команда с которой вы проводите фото- видеосъемка, продумываете вместе контент план и его реализацию, то есть ты не остаешься одна, у тебя всегда есть рядом помощь и поддержка.</div></details>
+<details class="accordion-item"><summary>Заработок</summary><div class="accordion-content">Вообще по статистике заработная плата начинается от 80 тысяч рублей, а дальше уже растет. Потому что растет аккаунт, приходит аудитория, улучшаются охваты, приходят доп проекты на рекламу в общем все это вместе. Золотых гор обещать не буду, но здесь действительно можно зарабатывать очень хорошо. Заработок складывается из монетизации аккаунтов и стримов. Знаешь что такое монетизация?</div></details>
+<details class="accordion-item"><summary>Донаты</summary><div class="accordion-content">Это когда ты можешь получать поддержку от своей аудитории, то есть донаты. Получать можно за все что угодно, например, за приятную беседу или диалог, интересный контент, также это могут быть подарочки в виде стикеров, может быть в тиктоке видела когда-нибудь. Розочки, например.
+
+У нас есть общие чаты, где скидывают донаты, а также есть если личные чаты, там уже заработок идет поминутно.</div></details>
+<details class="accordion-item"><summary>Пробные смены (стажировка)</summary><div class="accordion-content">Здесь ты делаешь вывод интересно тебе это или нет, на момент стажировки, необходимо эти три смены отработать, потому что компания покупает промо период на 21 час, делим его на три дня по 7. Благодаря промо периоду аккаунт находится в топе и можно охватить большое количество аудитории с первых дней, хорошо заработать и оставить эту аудиторию у себя на аккаунте. После реализации промо-периода проводится дополнительное собеседования и подводятся итоги успешно ли ты прошла стажировку. Если и нас и тебя все устраивает, то мы составляем расписание на неделю и работаем по нему.</div></details>
+
+<h2 class="accordion-group-title">Возражения и ответы на вопросы</h2>
+<div class="accordion-note"><strong>Важно</strong><br>Этот раздел создан в первую очередь для ознакомления и понимания того, как отвечать на возражения. Не обязательно копировать сообщения слово в слово. Старайся писать своими словами, учитывать контекст диалога и отвечать естественно, сохраняя основной смысл ответа.</div>
+<details class="accordion-item"><summary>Это вебкам? / Это пошло?</summary><div class="accordion-content"><div class="answer-variant"><strong>Логика:</strong>Никогда не оправдывайся. Смейся над этим.</div><div class="answer-variant"><strong>Скрипт</strong>«Ахаха, ну ты даешь! Какой вебкам, я себя на помойке не находила) Это обычные разговорные стримы, типа как в ТикТоке эфиры ведут. Просто у нас продюсерский центр, мы площадки новые раскручиваем, нам люди нужны для общения. Я сама тут работаю, если бы там была какая-то дичь — я бы первая оттуда свалила».</div></div></details>
+<details class="accordion-item"><summary>А это безопасно? / А вдруг обманут?</summary><div class="accordion-content"><div class="answer-variant"><strong>Логика:</strong>Апеллируй к своему личному опыту и системности.</div><div class="answer-variant"><strong>Скрипт</strong>Слушай, ну я же работаю, и куча девчонок знакомых тут. У нас все прозрачно: стажировку отработала — деньги получила. Нас компания страхует, потому что им выгодно, чтобы мы там сидели и аудиторию собирали. Это же официальная тема для раскрутки платформы, никто не будет подставляться из-за ерунды.</div></div></details>
+<details class="accordion-item"><summary>Я подумаю / Мне надо посоветоваться</summary><div class="accordion-content"><div class="answer-variant"><strong>Логика:</strong>Возражение — это вежливый отказ из-за страха. Дави на дефицит мест так как и другие хотят и предлагай легкий вход.</div><div class="answer-variant"><strong>Скрипт</strong>Да я понимаю, конечно! Просто у нас сейчас набор ограниченный — компания промо-период на платформы выкупает, нужны люди прямо сейчас. Если будешь долго думать , просто место заберут, и потом придется ждать следующего набора. Давай так: ты просто пообщаешься на собесе, ни к чему это не обязывает. Увидишь , что все адекватно,  и решишь уже на месте. Ок?</div></div></details>
+<details class="accordion-item"><summary>А если не получится / Я не умею общаться?</summary><div class="accordion-content"><div class="answer-variant"><strong>Логика:</strong>Дай ей защитника в лице опытной команды.</div><div class="answer-variant"><strong>Скрипт</strong>Ты думаешь, я сразу всё умела?) Там у каждой есть свой продюсер — он за ручку водит на всех этапах. Тебе подскажут , о чем говорить , как свет поставить , как аудиторию цеплять. Ты не одна будешь , за тебя вся команда переживает,  чтобы ты заработала , потому что твой заработок — это и их результат тоже.</div></div></details>
+<details class="accordion-item"><summary>Я боюсь, что меня узнают знакомые</summary><div class="accordion-content"><div class="answer-variant"><strong>Логика:</strong>Аргумент анонимность/масштаб.</div><div class="answer-variant"><strong>Скрипт</strong>Слушай, ну там аудитория международная , тысячи людей. Шанс , что тебя увидит кто-то из знакомых — один на миллион , и то если они будут сидеть на этой же платформе в это же время. Если прям сильно паришься — можно образ какой-то придумать , никнейм, вообще не проблема. Ты там будешь как медийная личность , а не маша из соседнего подъезда аххаха</div></div></details>
+<details class="accordion-item"><summary>Можешь дать профили других девушек для связи?</summary><div class="accordion-content"><div class="answer-variant"><strong>Вариант 1</strong>конечно, я бы с удовольствием показала, если бы была возможность поделиться контактами. но, к сожалению, это конфиденциальная информация, и с человеческой точки зрения было бы странно так поступать</div><div class="answer-variant"><strong>Вариант 2</strong>я бы с радостью поделилась контактами, если бы это было возможно. но, к сожалению, это конфиденциальная информация, да и с человеческой точки зрения это некрасиво</div><div class="answer-variant"><strong>Вариант 3</strong>мы не можем распространять данные моделей без их ведома, но я могу предложить тебе посмотреть примеры их стримчиков в нашем тгк)</div></div></details>
+<details class="accordion-item"><summary>Чем нужно заниматься на стримах?</summary><div class="accordion-content"><div class="answer-variant"><strong>Вариант 1</strong>на стримах можешь заниматься тем что тебе нравится, в основном это разговорные стримы, а так тематика подбирается под твои увлечения и хобби</div><div class="answer-variant"><strong>Вариант 2</strong>наши модели в основном занимаются своими увлечениями/хобби. ты можешь рисовать, играть, танцевать и тд., главное поддерживать общение с аудиторией)</div><div class="answer-variant"><strong>Вариант 3</strong>наши модели в основном увлечены своими хобби и интересами. ты можешь рисовать, играть, танцевать и так далее, при этом важно удерживать аудиторию</div></div></details>
+<details class="accordion-item"><summary>Откуда мой юзер?</summary><div class="accordion-content"><div class="answer-variant"><strong>Вариант 1</strong>ищу контакты через знакомых, в разных чатах, группах, дв и тд. сейчас уже не смогу подсказать откуда именно)</div><div class="answer-variant"><strong>Вариант 2</strong>ищу в разных чатах, группах, дв, тт и тд. сейчас уже не вспомню откуда именно)</div><div class="answer-variant"><strong>Вариант 3</strong>блин, нашла твой юз давно, но написала только сейчас, точно не помню где(
+но ищу обычно в разных группах/чатах, в тт, либо в других соцсетях</div></div></details>
+<details class="accordion-item"><summary>На каких платформах проводятся прямые трансляции?</summary><div class="accordion-content"><div class="answer-variant"><strong>Вариант 1</strong>прямые трансляции проводятся на таких площадках как Uscreen, Nonolive, Dacast</div><div class="answer-variant"><strong>Вариант 2</strong>мы работаем на 3 основных платформах, но иногда могут добавлять и другие, зависит от выбранной тематики: Dacast, NonoLive, Uscreen</div></div></details>
+<details class="accordion-item"><summary>Обязательно ли знание английского языка?</summary><div class="accordion-content"><div class="answer-variant"><strong>Вариант 1</strong>нет, знание английского языка не обязательно. на платформе будет встроенный переводчик, а так же мы закрепим за тобой модератора, которой поможет и подскажет</div><div class="answer-variant"><strong>Вариант 2</strong>нет, знание языка не обязательно. на платформе будет встроенный переводчик, а так же тебе будет помогать твой модератор</div><div class="answer-variant"><strong>Вариант 3</strong>не переживай, тебе назначат наставника-модератора, который будет поддерживать тебя, отвечать на вопросы и помогать с общением на площадке, ведь выучить все языки невозможно)</div></div></details>
+<details class="accordion-item"><summary>Куда и когда отправляют зарплату?</summary><div class="accordion-content"><div class="answer-variant"><strong>Вариант 1</strong>в первые два стажировочных дня – зп сразу после сменки на карту, после – каждую неделю</div><div class="answer-variant"><strong>Вариант 2</strong>в стажировку сразу после сменки, после стажировки каждую неделю на карту</div></div></details>
+<details class="accordion-item"><summary>Я всё равно думаю, что это вебкам</summary><div class="accordion-content"><div class="answer-variant"><strong>Вариант 1</strong>это не вебкам) ты самостоятельно выбираешь тематику своих стримов, можешь ознакомиться с примерами из нашего тгк, а также при желании мы можем подписать договор ГПХ</div><div class="answer-variant"><strong>Вариант 2</strong>нет никакого вебкама. наша компания занимается только развлекательными стримами на зарубежную аудиторию, мы делим с тобой денюжки с монетизации, с чего выгодно и тебе, и нам)</div></div></details>
+<details class="accordion-item"><summary>Ты тоже этим занимаешься?</summary><div class="accordion-content"><div class="answer-variant"><strong>Вариант 1</strong>да, раньше тоже проводила прямые трансляции, очень нравилось и по сей день нравится, но сейчас у меня появились проблемы со здоровьем, из-за чего больше не могу стримить</div><div class="answer-variant"><strong>Вариант 2</strong>да, раньше тоже занималась стримингом, но из за семейных обстоятельств пришлось прекратить, на данный момент я менеджер по подбору персонала</div></div></details>
+<details class="accordion-item"><summary>А это точно не скам?</summary><div class="accordion-content"><div class="answer-variant"><strong>Вариант 1</strong>нет никакого обмана. что именно тебя смущает?</div><div class="answer-variant"><strong>Вариант 2</strong>давай расскажу подробнее и отвечу на все твои вопросы, чтоб у тебя не было сомнений)</div><div class="accordion-note">Первый вариант подходит, когда вы уже разговорились. Второй — если девушка спросила в самом начале.</div></div></details>
+<details class="accordion-item"><summary>Номер точно не сольёте?</summary><div class="accordion-content"><div class="answer-variant"><strong>Вариант 1</strong>нет, все данные наших контент-моделей являются строго конфиденциальными, так что не стоит беспокоиться по этому поводу)</div></div></details>
+<details class="accordion-item"><summary>А это вообще легально?</summary><div class="accordion-content"><div class="answer-variant"><strong>Вариант 1</strong>да, все полностью легально, по желанию можем подписать договор гпх</div><div class="answer-variant"><strong>Вариант 2</strong>да, все легально. наша компания продвигает прямые трансляции на зарубежных платформах, из-за более крупной монетизации</div><div class="answer-variant"><strong>Вариант 3</strong>да, прямые трансляции разрешены, никаких законов о запрете нет</div></div></details>
+<details class="accordion-item"><summary>Как вы меня нашли, если я ни в каких группах не состою?</summary><div class="accordion-content"><div class="answer-variant"><strong>Вариант 1</strong>я работаю с большим объемом, собираю контакты в телеграмм каналах, в чатах и отписываю, не смогу подсказать где именно(</div><div class="answer-variant"><strong>Вариант 2</strong>я не имела ввиду только группы, ищу где это только возможно. может это была инста, тт или вк)</div></div></details>
+<details class="accordion-item"><summary>Подписывается ли какой-нибудь договор? / Официально ли это?</summary><div class="accordion-content"><div class="answer-variant"><strong>Вариант 1</strong>да, по желанию подписывается договор гпх</div><div class="answer-variant"><strong>Вариант 2</strong>да! подписывается договор гпх, по твоему желанию</div></div></details>
+<details class="accordion-item"><summary>По каким критериям вы поняли, что я вам подхожу?</summary><div class="accordion-content"><div class="answer-variant"><strong>Вариант 1</strong>у нас нет жестких критериев по поводу внешности. достаточно быть просто опрятной и ухоженной, поэтому попробовать себя может каждая)</div><div class="answer-variant"><strong>Вариант 2</strong>у нас нет каких то жёстких критериев по поводу внешности, самое главное чтоб ты выглядела опрятно</div><div class="answer-variant"><strong>Вариант 3</strong>жёстких требований к внешности вообще нет, не переживай. главное – просто опрятный внешний вид</div></div></details>
+<details class="accordion-item"><summary>Требуется ли аппаратура? / Нужен ли ПК для работы?</summary><div class="accordion-content"><div class="answer-variant"><strong>Вариант 1</strong>для начала работы понадобится только телефончик, но также можно проводить прямые трансляции с компьютера или ноутбука, если есть веб-камера с хорошим качеством</div><div class="answer-variant"><strong>Вариант 2</strong>для начала работы достаточно будет только твоего телефончика. подскажи пожалуйста, какая у тебя моделька? просто не все подходят(</div><div class="answer-variant"><strong>Вариант 3</strong>для начала подойдёт всего лишь телефончик, так же можно проводить прямые трансляции с пк/ноутбука если есть веб-камера</div></div></details>
+<details class="accordion-item"><summary>Можно ли во время эфира отходить ненадолго?</summary><div class="accordion-content"><div class="answer-variant"><strong>Вариант 1</strong>да, можно. но не более 5 минут, так как платформа увидет что ты не активна и стрим автоматически завершится</div><div class="answer-variant"><strong>Вариант 2</strong>конечно можно, никто не будет держать тебя, если хочешь отойти, можешь, но лучше не отходить на долго, иначе все разойдутся</div><div class="answer-variant"><strong>Вариант 3</strong>да, делать перерывы по 1-5 минут это совершенно нормально. главное, чтоб стрим не оставался без активности слишком долго</div></div></details>
+<details class="accordion-item"><summary>Нужно ли показывать личные данные или документы?</summary><div class="accordion-content"><div class="answer-variant"><strong>Вариант 1</strong>да, но нужно будет показать только дату рождения из паспорта для подтверждения возраста, все остальные данные можешь заклеить стикерами</div><div class="answer-variant"><strong>Вариант 2</strong>да, но необходимо будет предоставить только дату рождения из паспорта для подтверждения возраста, остальные данные можно скрыть</div><div class="answer-variant"><strong>Вариант 3</strong>да, но для подтверждения возраста нужно будет показать только дату рождения из паспорта, остальные данные можно оставить скрытыми</div></div></details>
+<details class="accordion-item"><summary>Какие устройства подходят для стримов?</summary><div class="accordion-content"><div class="answer-variant"><strong>Вариант 1</strong>iPhone 11 и выше
+Андроид 23 года и новее
+Флагманы 22 года и новее</div></div></details>
+<details class="accordion-item"><summary>А что нужно делать?</summary><div class="accordion-content"><div class="answer-variant"><strong>Вариант 1</strong>на стримах можешь заниматься тем что тебе нравится, в основном это разговорные стримы, а так тематика подбирается под твои увлечения и хобби</div><div class="answer-variant"><strong>Вариант 2</strong>наши модели в основном занимаются своими увлечениями/хобби. ты можешь рисовать, играть, танцевать и тд., главное поддерживать общение с аудиторией)</div></div></details>
+</div></section>
+<section class="page" id="referrals">
+<div class="page-head"><h1>Рефералы</h1></div>
+<div class="home-content">
+<section class="intro-section" style="border-top:0;padding-top:0">
+<h2>Самый простой старт</h2>
+<p>Если ты только начинаешь, рефералы — самый лёгкий способ попробовать заработать. Не нужно самому искать модель: рассказываешь человеку о работе, помогаешь подключиться, а бонус получаешь, когда приглашённый агент приведёт модель и она отработает 4 смены. За это начисляют $25. Бонус не мгновенный — сначала должны выполниться условия.</p>
+</section>
+<section class="intro-section">
+<h3>1. Где искать агентов</h3>
+<p><strong>Знакомые и друзья.</strong> Начни с тех, кто уже тебя знает. Расскажи, чем занимаешься, какие задачи у скаута и как устроены выплаты. Не обещай лёгких денег и объясни, что результат зависит от работы.</p>
+<p><strong>TikTok.</strong> Можно искать людей, которым интересна удалённая работа или тема заработка. Если начинаешь диалог в комментариях или личке, пиши по-человечески и не спамь одинаковыми сообщениями всем подряд.</p>
+</section>
+<section class="intro-section">
+<h3>2. Что написать заинтересованному человеку</h3>
+<div class="script-box"><div class="script-top"><strong>Пример сообщения</strong><button class="copy-btn" type="button" data-copy="Я работаю с командой скаутов: мы ищем совершеннолетних девушек для разговорных стримов на зарубежных платформах. Новичкам дают инструкции и помогают разобраться. За свою работу скаут получает выплаты за смены моделей, а ещё можно пригласить других агентов и получать реферальный бонус. Обучение бесплатное, вложения не нужны. Если интересно, расскажу подробнее об условиях.">Копировать</button></div><div class="script-text">Я работаю с командой скаутов: мы ищем совершеннолетних девушек для разговорных стримов на зарубежных платформах. Новичкам дают инструкции и помогают разобраться. За свою работу скаут получает выплаты за смены моделей, а ещё можно пригласить других агентов и получать реферальный бонус. Обучение бесплатное, вложения не нужны. Если интересно, расскажу подробнее об условиях.</div></div>
+</section>
+<section class="intro-section">
+<h3>3. Как подключить реферала</h3>
+<ol><li>Отправь человеку свою реферальную ссылку на бота.</li><li>Попроси перейти по ссылке и нажать <code>/start</code>.</li><li>После этого отправь контакт наставника и попроси написать ему.</li><li>Дальнейшее подключение проходит через наставника. Не отправляй человека самостоятельно проходить регистрацию по другим ссылкам.</li></ol>
+<div class="script-box"><div class="script-top"><strong>Сообщение после /start</strong><button class="copy-btn" type="button" data-copy="Теперь напиши наставнику, он подскажет дальнейшие шаги.
+
+Наставник: @epilepc">Копировать</button></div><div class="script-text">Теперь напиши наставнику, он подскажет дальнейшие шаги.
+
+Наставник: @epilepc</div></div>
+</section>
+<section class="intro-section">
+<h3>4. Что важно помнить</h3>
+<ul><li>Человек должен перейти именно по твоей реферальной ссылке и нажать <code>/start</code>, чтобы реферал засчитался.</li><li>Бонус $25 начисляется только после того, как приглашённый агент приведёт модель, которая отработает 4 смены.</li><li>Объясняй условия честно: это возможность получить дополнительный доход, но бонус не гарантирован заранее и зависит от выполнения условий.</li></ul>
+</section>
+</div>
+</section>
+<section class="page" id="payouts">
+<div class="page-head"><h1>Выплаты</h1></div>
+<div class="payouts-wrap">
+  <p class="payouts-intro">Выбери количество моделей или рефералов, чтобы рассчитать возможные выплаты.</p>
+  <section class="payout-calculator" aria-label="Расчёт выплат за модели">
+    <div class="payout-kicker">МОДЕЛИ</div>
+    <div class="payout-total" id="modelsTotal">$120</div>
+    <div class="payout-caption">расчётный доход в месяц</div>
+    <div class="range-label"><label for="modelsRange">Количество моделей</label><output id="modelsCount" for="modelsRange">1</output></div>
+    <input class="payout-range" id="modelsRange" type="range" min="1" max="30" step="1" value="1" aria-label="Количество моделей от 1 до 30">
+    <div class="range-ticks"><span>1</span><span>10</span><span>20</span><span>30</span></div>
+    <div class="payout-explanation">Расчёт из $6 за смену и в среднем 20 смен в месяц на одну модель.</div>
+  </section>
+  <section class="payout-calculator" aria-label="Расчёт реферальных бонусов">
+    <div class="payout-kicker">РЕФЕРАЛЫ</div>
+    <div class="payout-total" id="referralsTotal">$25</div>
+    <div class="payout-caption">общая сумма бонусов</div>
+    <div class="range-label"><label for="referralsRange">Количество рефералов</label><output id="referralsCount" for="referralsRange">1</output></div>
+    <input class="payout-range" id="referralsRange" type="range" min="1" max="30" step="1" value="1" aria-label="Количество рефералов от 1 до 30">
+    <div class="range-ticks"><span>1</span><span>10</span><span>20</span><span>30</span></div>
+    <div class="payout-explanation">$25 за каждого приглашённого агента, который привёл модель, отработавшую 4 смены.</div>
+  </section>
+</div>
+</section>
+</main></div>
+<script>
+
+function bindPayoutSlider(rangeId,countId,totalId,rate){
+ const range=document.getElementById(rangeId),count=document.getElementById(countId),total=document.getElementById(totalId);
+ if(!range||!count||!total)return;
+ const update=()=>{const n=Number(range.value);count.value=String(n);count.textContent=String(n);total.textContent='$'+(n*rate).toLocaleString('en-US');};
+ range.addEventListener('input',update);update();
+}
+bindPayoutSlider('modelsRange','modelsCount','modelsTotal',120);
+bindPayoutSlider('referralsRange','referralsCount','referralsTotal',25);
+
+const sections=[
+ {id:'home',title:'Главная'},
+ {id:'registration',title:'Регистрация'},
+ {id:'referrals',title:'Рефералы'},
+ {id:'models',title:'Модели'},
+ {id:'model-search',title:'Поиск моделей'},
+ {id:'questionnaire',title:'Запись на собеседование'},
+ {id:'model-questionnaire',title:'Анкета для модели'},
+ {id:'first-touch',title:'Первое касание'},
+ {id:'faq',title:'Возражения и FAQ'},
+ {id:'payouts',title:'Выплаты'}
+];
+const navLink=(s,i)=>`<a class="nav-link ${s.id==='home'?'active':''}" href="#${s.id}" data-page="${s.id}"><span class="num">${String(i+1).padStart(2,'0')}</span><span>${s.title}</span></a>`;
+function go(id){if(!sections.some(s=>s.id===id))id='home';document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.nav-link').forEach(a=>a.classList.toggle('active',a.dataset.page===id));document.getElementById('drawer')?.classList.remove('open');document.getElementById('overlay')?.classList.remove('show');const menuToggle=document.getElementById('mobileMenuToggle');if(menuToggle)menuToggle.checked=false;window.scrollTo(0,0);}
+document.addEventListener('click',e=>{const a=e.target.closest('a[data-page],a.section-card,a.back');if(!a)return;const href=a.getAttribute('href')||'';const id=a.dataset.page||(href.startsWith('#')?href.slice(1):'');if(!id)return;e.preventDefault();history.replaceState(null,'','#'+id);go(id);document.documentElement.scrollTop=0;document.body.scrollTop=0;});
+
+window.addEventListener('hashchange',()=>go(location.hash.slice(1)||'home'));if(location.hash)go(location.hash.slice(1));
+
+document.addEventListener('click', async (e) => {
+  const btn = e.target.closest('[data-copy]');
+  if (!btn) return;
+  const value = btn.getAttribute('data-copy') || '';
+  try {
+    await navigator.clipboard.writeText(value);
+    const old = btn.textContent;
+    btn.textContent = 'Скопировано';
+    setTimeout(() => btn.textContent = old, 1400);
+  } catch (_) {
+    const area = document.createElement('textarea');
+    area.value = value;
+    area.style.position = 'fixed';
+    area.style.opacity = '0';
+    document.body.appendChild(area);
+    area.select();
+    try { document.execCommand('copy'); btn.textContent = 'Скопировано'; }
+    catch (_) { btn.textContent = 'Скопируй вручную'; }
+    area.remove();
+    setTimeout(() => btn.textContent = 'Копировать', 1400);
+  }
+});
+function updatePayoutTotal(){
+  const regular = Math.max(0, Number(document.getElementById('regularShifts')?.value || 0));
+  const bonus = Math.max(0, Number(document.getElementById('bonusShifts')?.value || 0));
+  const referrals = Math.max(0, Number(document.getElementById('refBonuses')?.value || 0));
+  const total = regular * 6 + bonus * 25 + referrals * 25;
+  const out = document.getElementById('payoutTotal');
+  if(out) out.textContent = '$' + total.toLocaleString('en-US', {maximumFractionDigits:2});
+}
+['regularShifts','bonusShifts','refBonuses'].forEach(id => document.getElementById(id)?.addEventListener('input', updatePayoutTotal));
+updatePayoutTotal();
+
+</script></body></html>
